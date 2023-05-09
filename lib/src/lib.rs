@@ -1,14 +1,7 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+pub trait Node {
+    
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub struct GraphDB {
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
 }
