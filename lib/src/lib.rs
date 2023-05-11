@@ -1,16 +1,15 @@
-use std::marker::PhantomData;
+use serde::{Serialize, Deserialize};
+use uuid::Uuid;
 
-use serde::{Deserialize, Serialize};
-
-pub struct Node<'a, R: NodeData<'a>> {
-    _marker: &'a PhantomData<R>,
-    data: R,
+pub struct Node {
+    id: Uuid,
+    data: Box<dyn Serialize>
+    
 }
 
-pub trait NodeData<'a>: Serialize + Deserialize<'a> {}
-
-pub trait Edge<'a, V: NodeData<'a>> {
-    fn get_vertices(&'a self) -> (Node<V>, Node<V>);
+impl Node {
+    pub fn new(data: impl Serialize ) -> Self {
+        let id = Uuid::new_v4();
+        Self { id, data }
+    }
 }
-
-pub struct GraphDB {}
