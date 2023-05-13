@@ -27,3 +27,7 @@ impl Database {
         }
     }
 }
+
+struct Vector {
+
+}
