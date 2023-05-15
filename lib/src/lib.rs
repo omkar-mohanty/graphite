@@ -16,18 +16,34 @@ impl Node {
     }
 }
 
-pub struct Database {
-    nodes: BTreeMap<Uuid, Node>,
+pub enum Direction {
+    Inbound,
+    Outbound,
 }
 
-impl Database {
-    pub fn new() -> Self {
-        Database {
-            nodes: BTreeMap::new(),
-        }
+pub struct Edge<'a> {
+    tag: String,
+    vertex1:&'a Node,
+    vertex2:&'a Node,
+    direction: Option<Direction>
+}
+
+impl<'a> Edge<'a> {
+    pub fn new(vertex1:&'a Node, vertex2:&'a Node, tag: String) -> Self {
+        Edge { vertex1, vertex2, direction: None, tag }
     }
 }
 
-struct Vector {
+pub struct Database<'a> {
+    nodes: BTreeMap<Uuid, Node>,
+    edges: BTreeSet<Edge<'a>>
+}
 
+impl<'a> Database<'a> {
+    pub fn new() -> Self {
+        Database {
+            nodes: BTreeMap::new(),
+            edges: BTreeSet::new(),
+        }
+    }
 }
