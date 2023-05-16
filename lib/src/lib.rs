@@ -14,6 +14,10 @@ impl Node {
             data: data.to_vec(),
         }
     }
+
+    pub fn id(&self) -> &Uuid {
+        &self.id
+    }
 }
 
 pub enum Direction {
@@ -21,29 +25,34 @@ pub enum Direction {
     Outbound,
 }
 
-pub struct Edge<'a> {
+pub struct Edge {
     tag: String,
-    vertex1:&'a Node,
-    vertex2:&'a Node,
-    direction: Option<Direction>
+    vertex1: Uuid,
+    vertex2: Uuid,
+    direction: Option<Direction>,
 }
 
-impl<'a> Edge<'a> {
-    pub fn new(vertex1:&'a Node, vertex2:&'a Node, tag: String) -> Self {
-        Edge { vertex1, vertex2, direction: None, tag }
+impl Edge {
+    pub fn new<'a>(vertex1: Uuid, vertex2: Uuid, tag: String) -> Self {
+        Edge {
+            vertex1,
+            vertex2,
+            direction: None,
+            tag,
+        }
     }
 }
 
-pub struct Database<'a> {
+pub struct Database {
     nodes: BTreeMap<Uuid, Node>,
-    edges: BTreeSet<Edge<'a>>
+    edges: BTreeMap<Uuid, Edge>,
 }
 
-impl<'a> Database<'a> {
+impl Database {
     pub fn new() -> Self {
         Database {
             nodes: BTreeMap::new(),
-            edges: BTreeSet::new(),
+            edges: BTreeMap::new(),
         }
     }
 }
