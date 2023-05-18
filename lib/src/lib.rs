@@ -55,4 +55,8 @@ impl Database {
             edges: BTreeMap::new(),
         }
     }
+
+    pub fn add_node(&self, node: Node) {
+        self.nodes.append(node);
+    }
 }
