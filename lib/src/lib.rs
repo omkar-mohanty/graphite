@@ -56,7 +56,11 @@ impl Database {
         }
     }
 
-    pub fn add_node(&self, node: Node) {
-        self.nodes.append(node);
+    pub fn add_node(&mut self,id:Uuid ,node: Node) {
+        self.nodes.insert(id, node);
+    }
+
+    pub fn edges(&self) -> &BTreeMap<Uuid, Edge> {
+        &self.edges
     }
 }
