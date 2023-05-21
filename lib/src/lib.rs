@@ -63,4 +63,9 @@ impl Database {
     pub fn edges(&self) -> &BTreeMap<Uuid, Edge> {
         &self.edges
     }
+
+    pub fn get_node_by_id(&self,id: Uuid) -> &Node {
+       self.nodes.get(&id).unwrap() 
+    }
+
 }
