@@ -15,6 +15,11 @@ async fn echo(req_body: String) -> impl Responder {
     HttpResponse::Ok().body(req_body)
 }
 
+#[get("/{name}")]
+async fn get_db(req_body: String) -> impl Responder {
+
+}
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| App::new().service(hello))
